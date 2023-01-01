@@ -11,3 +11,7 @@ services:
       # - MIGRATION_MODE=down
     networks:
     - sql-migrate-git-network
+
+networks:
+  sql-migrate-git-network:
+    external: true
