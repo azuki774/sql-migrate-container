@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+   sql-migrate-git:
+    image: sql-migrate-git
+    container_name: sql-migrate-git
+    environment:
+      - GIT_REPO=https://github.com/azuki774/sql-migrate-git
+      - MIGRATION_DIR=test/migration
+      - MIGRATION_ENV=local

@@ -5,5 +5,8 @@ WORKDIR /root/sql-migrate
 RUN go mod tidy && go mod vendor
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags "netgo" -installsuffix netgo -ldflags="-s -w -extldflags \"-static\"" -buildvcs=false -o /bin/ ./...
 
-FROM alpine:3.16
+FROM ubuntu:latest
 COPY --from=builder /bin/sql-migrate /usr/local/bin/sql-migrate
+RUN chmod +x /usr/local/bin/sql-migrate
+COPY scripts /scripts/
+ENTRYPOINT ["/scripts/main.sh"]
