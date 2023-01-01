@@ -1,7 +1,6 @@
 #!/bin/bash -ex
 BIN=/usr/local/bin/sql-migrate
 
-GIT_REPO=${GIT_REPO}
 MIGRATION_DIR=${MIGRATION_DIR}
 MIGRATION_ENV=${MIGRATION_ENV}
 MIGRATION_MODE=${MIGRATION_MODE}
@@ -17,5 +16,7 @@ echo "migrate env: ${MIGRATION_ENV}"
 echo "migrate mode: ${MIGRATION_MODE}"
 
 mkdir -p /work && cd /work/
-git clone ${GIT_REPO}
-cd ${MIGRATION_DIR}
+
+source /scripts/fetch.sh # download from git
+
+${BIN} ${MIGRATION_MODE} -env=${MIGRATION_ENV}

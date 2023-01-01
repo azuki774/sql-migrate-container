@@ -9,3 +9,5 @@ services:
       - MIGRATION_DIR=test/migration
       - MIGRATION_ENV=local
       # - MIGRATION_MODE=down
+    networks:
+    - sql-migrate-git-network

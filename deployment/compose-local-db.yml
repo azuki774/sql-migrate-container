@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  db:
+  testdatabase:
     image: mariadb:10.9
     container_name: testdatabase
     command:
@@ -13,3 +13,9 @@ services:
     environment:
       - MYSQL_DATABASE=database
       - MYSQL_ROOT_PASSWORD=password
+    networks:
+    - sql-migrate-git-network
+
+networks:
+  sql-migrate-git-network:
+    external: true
