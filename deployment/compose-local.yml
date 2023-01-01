@@ -8,3 +8,4 @@ services:
       - GIT_REPO=https://github.com/azuki774/sql-migrate-git
       - MIGRATION_DIR=test/migration
       - MIGRATION_ENV=local
+      # - MIGRATION_MODE=down

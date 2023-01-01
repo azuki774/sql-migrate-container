@@ -7,6 +7,10 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags "netgo" -installsuff
 
 FROM ubuntu:latest
 COPY --from=builder /bin/sql-migrate /usr/local/bin/sql-migrate
+RUN apt-get update && \
+    apt-get install -y git && \
+    apt-get -y clean && \
+    rm -rf /var/lib/apt/lits
 RUN chmod +x /usr/local/bin/sql-migrate
 COPY scripts /scripts/
 ENTRYPOINT ["/scripts/main.sh"]
