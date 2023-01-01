@@ -1,0 +1,3 @@
+[submodule "sql-migrate"]
+	path = sql-migrate
+	url = git@github.com:rubenv/sql-migrate.git
