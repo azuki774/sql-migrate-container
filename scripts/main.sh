@@ -1,11 +1,11 @@
 #!/bin/bash -ex
 BIN=/usr/local/bin/sql-migrate
 
-MIGRATION_DIR=${MIGRATION_DIR}
-MIGRATION_ENV=${MIGRATION_ENV}
-MIGRATION_MODE=${MIGRATION_MODE}
+# MIGRATION_DIR
+# MIGRATION_ENV
+# MIGRATION_MODE
 
-if [ MIGRATION_MODE != "" ]; then
+if [ -z ${MIGRATION_MODE} ]; then
     MIGRATION_MODE=up
 fi
 
