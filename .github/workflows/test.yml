@@ -55,3 +55,27 @@ jobs:
         run: grep "${WANT}" 'got3.log'
         env:
           WANT: 'Applied 1 migration'
+
+      - name: Apply migration (From env)
+        run: docker compose -f deployment/compose-local-fromenv.yml up > got4.log
+
+      - name: Check output
+        run: grep "${WANT}" 'got4.log'
+        env:
+          WANT: 'Applied 2 migrations'
+
+      - name: Downgrade migration (From env)
+        run: docker compose -f deployment/compose-local-fromenv-down.yml up > got5.log
+
+      - name: Check output
+        run: grep "${WANT}" 'got5.log'
+        env:
+          WANT: 'Applied 1 migration'
+
+      - name: Downgrade migration (From env)
+        run: docker rm sql-migrate-git-fromenv; docker compose -f deployment/compose-local-fromenv-down.yml up > got6.log
+
+      - name: Check output
+        run: grep "${WANT}" 'got6.log'
+        env:
+          WANT: 'Applied 1 migration'
