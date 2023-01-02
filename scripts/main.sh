@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 BIN=/usr/local/bin/sql-migrate
 
 # MIGRATION_DIR

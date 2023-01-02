@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-.PHONY: build start start-db stop stop-db clean
+.PHONY: build start start-db stop stop-db clean migration-test
 build:
 	docker build -t sql-migrate-git -f build/Dockerfile .
 
@@ -24,3 +24,10 @@ clean:
 	make stop
 	make stop-db
 	docker image rm sql-migrate-git
+
+migration-test:
+	- make clean
+	make build
+	make start-db
+	sleep 10s
+	make start
