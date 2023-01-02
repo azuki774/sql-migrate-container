@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+   sql-migrate-git:
+    image: sql-migrate-git
+    container_name: sql-migrate-git-fromenv
+    command: ["--from-env"]
+    environment:
+      - GIT_REPO=https://github.com/azuki774/sql-migrate-git # Git Repository URL
+      - GIT_REPO_TAG=add-ci # Tag or branch name
+      - GIT_MIGRATION_DIR=test/migration/db # SQL directory
+      - DB_USER=root
+      - DB_PASS=password # secret
+      - DB_HOST=testdatabase
+      - DB_NAME=database
+      - DB_OPT=?charset=utf8mb4&collation=utf8mb4_general_ci&parseTime=true
+      - MIGRATION_MODE=down # If sql-migrate down, uncomment out it.
+    networks:
+    - sql-migrate-git-network
+
+networks:
+  sql-migrate-git-network:
+    external: true
