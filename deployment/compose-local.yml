@@ -5,11 +5,11 @@ services:
     image: sql-migrate-git
     container_name: sql-migrate-git
     environment:
-      - GIT_REPO=https://github.com/azuki774/sql-migrate-git
-      - GIT_REPO_TAG=add-ci
-      - GIT_MIGRATION_DIR=test/migration
-      - MIGRATION_ENV=local
-      # - MIGRATION_MODE=down
+      - GIT_REPO=https://github.com/azuki774/sql-migrate-git # Git Repository URL
+      - GIT_REPO_TAG=add-ci # Tag or branch name
+      - GIT_MIGRATION_DIR=test/migration # dbconfig.yml directory
+      - MIGRATION_ENV=local # Use environment name in dbconfig.yml
+      # - MIGRATION_MODE=down # If sql-migrate down, uncomment out it.
     networks:
     - sql-migrate-git-network
 
