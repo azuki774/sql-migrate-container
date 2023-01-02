@@ -9,7 +9,7 @@ services:
       - GIT_REPO_TAG=add-ci
       - GIT_MIGRATION_DIR=test/migration
       - MIGRATION_ENV=local
-      # - MIGRATION_MODE=down
+      - MIGRATION_MODE=down
     networks:
     - sql-migrate-git-network
 

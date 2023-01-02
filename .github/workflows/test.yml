@@ -1,0 +1,57 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: docker-image
+    steps:
+      - name: Checkout with submodule
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Set up DB
+        run: make start-db
+
+      - name: Build
+        run: make build
+
+      - name: Run DB
+        run: make start-db && sleep 10s
+
+      - name: Apply migration
+        run: docker compose -f deployment/compose-local.yml up > got1.log
+
+      - name: Check output
+        run: grep "${WANT}" 'got1.log'
+        env:
+          WANT: 'Applied 2 migrations'
+
+      - name: Downgrade migration
+        run: docker compose -f deployment/compose-local-down.yml up > got2.log
+
+      - name: Check output
+        run: grep "${WANT}" 'got2.log'
+        env:
+          WANT: 'Applied 1 migration'
+
+      - name: Downgrade migration
+        run: docker rm sql-migrate-git; docker compose -f deployment/compose-local-down.yml up > got3.log
+
+      - name: Check output
+        run: grep "${WANT}" 'got3.log'
+        env:
+          WANT: 'Applied 1 migration'
