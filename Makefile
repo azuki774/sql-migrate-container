@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-.PHONY: build start start-db stop stop-db
+.PHONY: build start start-db stop stop-db clean
 build:
 	docker build -t sql-migrate-git -f build/Dockerfile .
 
@@ -19,3 +19,8 @@ stop:
 stop-db:
 	docker compose -f deployment/compose-local-db.yml down
 	- docker network rm sql-migrate-git-network
+
+clean:
+	make stop
+	make stop-db
+	docker image rm sql-migrate-git

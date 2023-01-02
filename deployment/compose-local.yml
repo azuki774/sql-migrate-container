@@ -6,7 +6,8 @@ services:
     container_name: sql-migrate-git
     environment:
       - GIT_REPO=https://github.com/azuki774/sql-migrate-git
-      - MIGRATION_DIR=test/migration
+      # - GIT_REPO_TAG=
+      - GIT_MIGRATION_DIR=test/migration
       - MIGRATION_ENV=local
       # - MIGRATION_MODE=down
     networks:
